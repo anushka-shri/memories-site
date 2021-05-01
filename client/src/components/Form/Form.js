@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useStyles from './styles';
-import FileBase from './react-file-base64';
+import FileBase from 'react-file-base64';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 
 function Form() {
@@ -14,13 +14,14 @@ function Form() {
 
 	const classes = useStyles();
 
-	const handleSubmit = () => {};
+    const handleSubmit = () => { };
+    const clear = () => { };
 	return (
 		<Paper className={classes.paper}>
 			<form
 				autoComplete='off'
 				noValidate
-				className={classes.form}
+				className={`${classes.root} ${classes.form}`}
 				onSubmit={handleSubmit}>
 				<Typography variant='h6'>Add Memory Here</Typography>
 				<TextField
