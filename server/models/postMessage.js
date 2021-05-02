@@ -1,11 +1,15 @@
 import mongoose from 'mongoose';
 
 const postSchema = mongoose.Schema({
-	title: String,
-	message: String,
 	creator: String,
+	title: {
+		type: String,
+		default: 'none'
+
+	},
+	message: String,
 	tags: [String],
-	selectedFile: String,
+
 	likeCount: {
 		type: Number,
 		default: 0,
@@ -14,6 +18,7 @@ const postSchema = mongoose.Schema({
 		type: Date,
 		default: new Date(),
 	},
+	selectedFile: String,
 });
 
 var PostMessage = mongoose.model('PostMessage', postSchema);

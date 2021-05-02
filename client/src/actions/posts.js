@@ -12,4 +12,14 @@ export const getPosts = () => async (dispatch) => {
     }
 };
 
+export const createPost = (post) =>  async (dispatch) => {
+    
+    try {
 
+        // api.createPost is being imported from api where url is fetched using axios
+        const { data } = await api.createPost(post);
+        dispatch({type: 'NEW_POSTS', payload: data});
+    } catch (error) {
+        console.log(error.message)
+    }
+}

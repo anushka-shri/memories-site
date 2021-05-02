@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import useStyles from './styles';
 import FileBase from 'react-file-base64';
+import {createPost} from '../../actions/posts'
+import { useDispatch } from 'react-redux';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 
 function Form() {
-	const [postData, setPostData] = useState({
-		creator: '',
-		title: '',
-		message: '',
-		tags: '',
-		selectedFile: '',
-	});
+	 const [postData, setPostData] = useState({
+			creator: '',
+			title: '',
+			message: '',
+			tags: '',
+			selectedFile: '',
+		});
 
 	const classes = useStyles();
+	const dispatch = useDispatch();
 
-    const handleSubmit = () => { };
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		dispatch(createPost(postData))
+
+	 };
     const clear = () => { };
 	return (
 		<Paper className={classes.paper}>
@@ -23,42 +31,46 @@ function Form() {
 				noValidate
 				className={`${classes.root} ${classes.form}`}
 				onSubmit={handleSubmit}>
-				<Typography variant='h6'>Add Memory Here</Typography>
+				<Typography variant='h6'>Creating a Memory</Typography>
 				<TextField
 					name='creator'
-					label='Creator'
 					variant='outlined'
+					label='Creator'
 					fullWidth
+					value={postData.creator}
 					onChange={(e) =>
 						setPostData({ ...postData, creator: e.target.value })
 					}
-					value={postData.creator}
 				/>
 				<TextField
-					name='titler'
-					label='Title'
+					name='title'
 					variant='outlined'
+					label='Title'
 					fullWidth
+					value={postData.title}
 					onChange={(e) => setPostData({ ...postData, title: e.target.value })}
-					value={postData.creator}
 				/>
 				<TextField
 					name='message'
-					label='Message'
 					variant='outlined'
+					label='Message'
 					fullWidth
+					multiline
+					rows={4}
+					value={postData.message}
 					onChange={(e) =>
 						setPostData({ ...postData, message: e.target.value })
 					}
-					value={postData.creator}
 				/>
 				<TextField
 					name='tags'
-					label='Tags'
 					variant='outlined'
+					label='Tags (coma separated)'
 					fullWidth
-					onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
-					value={postData.creator}
+					value={postData.tags}
+					onChange={(e) =>
+						setPostData({ ...postData, tags: e.target.value.split(',') })
+					}
 				/>
 				<div className={classes.fileInput}>
 					<FileBase
@@ -82,7 +94,7 @@ function Form() {
 					variant='contained'
 					color='secondary'
 					size='small'
-					onClick={clear}
+					// onClick={clear}
 					fullWidth>
 					Clear
 				</Button>
