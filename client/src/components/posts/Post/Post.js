@@ -14,7 +14,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import useStyles from './styles';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
 
-function Post({ post }) {
+function Post({ post,setCurrentId }) {
 	const classes = useStyles();
 	return (
 		<Card className={classes.card}>
@@ -36,7 +36,7 @@ function Post({ post }) {
 				<Button
 					style={{ color: 'white' }}
 					size='small'
-					onClick={() => {}}>
+					onClick={() => setCurrentId(post._id)}>
 					<MoreHorizIcon fontSize='default' />
 				</Button>
 			</div>
