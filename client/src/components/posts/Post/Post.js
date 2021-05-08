@@ -37,7 +37,7 @@ function Post({ post,setCurrentId }) {
 					style={{ color: 'white' }}
 					size='small'
 					onClick={() => setCurrentId(post._id)}>
-					<MoreHorizIcon fontSize='default' />
+					<MoreHoriz fontSize='default' />
 				</Button>
 			</div>
 			<div className={classes.details}>

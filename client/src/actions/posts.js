@@ -24,7 +24,7 @@ export const createPost = (post) =>  async (dispatch) => {
     }
 }
 
-export const updatePost = (id,post) => async (dispatch) => {
+export const updatePost = (id, post) => async (dispatch) => {
 	try {
 		// api.createPost is being imported from api where url is fetched using axios
 		const { data } = await api.updatePost(id, post);
