@@ -14,24 +14,36 @@ function Form({ currentId, setCurrentId }) {
 		selectedFile: '',
 	});
 
-	const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+	const post = useSelector((state) =>
+		currentId ? state.posts.find((p) => p._id === currentId) : null,
+	);
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if(post) setPostData(post);
+		if (post) setPostData(post);
 	}, [post]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if(currentId) {
+		if (currentId) {
 			dispatch(updatePost(currentId, postData));
 		} else {
 			dispatch(createPost(postData));
 		}
+		clear();
 	};
-	const clear = () => {};
+	const clear = () => {
+		setCurrentId(null);
+		setPostData({
+			creator: '',
+			title: '',
+			message: '',
+			tags: '',
+			selectedFile: '',
+		});
+	};
 	return (
 		<Paper className={classes.paper}>
 			<form
@@ -39,7 +51,9 @@ function Form({ currentId, setCurrentId }) {
 				noValidate
 				className={`${classes.root} ${classes.form}`}
 				onSubmit={handleSubmit}>
-				<Typography variant='h6'>Creating a Memory</Typography>
+				<Typography variant='h6'>
+					{currentId ? 'Editing' : 'Creating'} a Memory
+				</Typography>
 				<TextField
 					name='creator'
 					variant='outlined'
@@ -102,7 +116,7 @@ function Form({ currentId, setCurrentId }) {
 					variant='contained'
 					color='secondary'
 					size='small'
-					// onClick={clear}
+					onClick={clear}
 					fullWidth>
 					Clear
 				</Button>
