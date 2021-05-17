@@ -30,12 +30,14 @@ function Auth() {
 					<Grid container spacing={2}>
 						{isSignUp && (
 							<>
-								<TextField
-									name='firstName'
-									label='First Name'
-									handleChange={handleChange}
-									autoFocus
-								/>
+								<Grid xs= {6} md={12}>
+									<TextField
+										name='firstName'
+										label='First Name'
+										handleChange={handleChange}
+										autoFocus
+									/>
+								</Grid>
 							</>
 						)}
 					</Grid>
