@@ -16,19 +16,23 @@ import Input from './Input.js';
 function Auth() {
 	const classes = useStyles();
 	const [showPassword, setShowPassword] = useState(false);
+	const [isSignUp, setSignUp] = useState(false);
 
-	const isSignUp = false;
+
 
 	const handleSubmit = () => {};
 	const handleChange = () => { };
 	const handleShowPassword = () => setShowPassword((prev) => !prev);
+	const switchMode = () => {
+		setSignUp(!isSignUp);
+	}
 	return (
 		<Container maxWidth='xs' component='main'>
 			<Paper className={classes.paper} elevation={3}>
 				<Avatar className={classes.avatar}>
 					<LockOutlinedIcon />
 				</Avatar>
-				<Typography variant='h5'>{isSignUp ? 'Sign Up' : 'Sign In'}</Typography>
+				<Typography variant='h5'>{isSignUp ? 'Register' : 'Login'}</Typography>
 				<form className={classes.form} onSubmit={handleSubmit}>
 					<Grid container spacing={2}>
 						{isSignUp && (
@@ -61,19 +65,30 @@ function Auth() {
 							type={showPassword ? 'text' : 'password'}
 							handleShowPassword={handleShowPassword}
 						/>
-						{isSignUp &&
-							<Input name='confirmPassword'
+						{isSignUp && (
+							<Input
+								name='confirmPassword'
 								label='Confirm Password'
 								handleChange={handleChange}
-							type='password'/>}
+								type='password'
+							/>
+						)}
 					</Grid>
-					<Button type='submit
-					fullWidth'
+					<Button
+						type='submit'
 						variant='contained'
+						fullWidth
 						color='primary'
-						className>
-						{isSignUp ? 'Sign Up' : 'Sign In'}
+						className={classes.submit}>
+						{isSignUp ? 'Register' : 'Login'}
 					</Button>
+					<Grid container justify="flex-end">
+						<Grid item>
+							<Button onClick={switchMode}>
+                             {isSignUp ? 'Login' : 'Register'}
+							</Button>
+						 </Grid>
+					</Grid>
 				</form>
 			</Paper>
 		</Container>
