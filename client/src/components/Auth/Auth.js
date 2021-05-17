@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
 	Paper,
 	Typography,
-	TextField,
-	Toolbar,
 	Avatar,
 	Button,
 	Container,
@@ -84,8 +82,11 @@ function Auth() {
 					</Button>
 					<Grid container justify="flex-end">
 						<Grid item>
-							<Button onClick={switchMode}>
-                             {isSignUp ? 'Login' : 'Register'}
+							<Button
+								onClick={switchMode}
+								color='secondary'
+							variant='outlined'>
+                             {isSignUp ? 'Already have an account? Login' : 'Create an account'}
 							</Button>
 						 </Grid>
 					</Grid>
