@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Paper,
 	Typography,
@@ -10,15 +10,18 @@ import {
 	Grid,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-
 import useStyles from './styles';
+import Input from './Input.js';
 
 function Auth() {
 	const classes = useStyles();
+	const [showPassword, setShowPassword] = useState(false);
+
 	const isSignUp = false;
 
 	const handleSubmit = () => {};
-	const handleChange = () => {};
+	const handleChange = () => { };
+	const handleShowPassword = () => setShowPassword((prev) => !prev);
 	return (
 		<Container maxWidth='xs' component='main'>
 			<Paper className={classes.paper} elevation={3}>
@@ -30,17 +33,47 @@ function Auth() {
 					<Grid container spacing={2}>
 						{isSignUp && (
 							<>
-								<Grid xs= {6} md={12}>
-									<TextField
-										name='firstName'
-										label='First Name'
-										handleChange={handleChange}
-										autoFocus
-									/>
-								</Grid>
+								<Input
+									name='firstName'
+									label='First Name'
+									handleChange={handleChange}
+									autoFocus
+									half
+								/>
+								<Input
+									name='lastName'
+									label='Last Name'
+									handleChange={handleChange}
+									half
+								/>
 							</>
 						)}
+						<Input
+							name='email'
+							label='Email Address'
+							handleChange={handleChange}
+							type='email'
+						/>
+						<Input
+							name='password'
+							label='Password'
+							handleChange={handleChange}
+							type={showPassword ? 'text' : 'password'}
+							handleShowPassword={handleShowPassword}
+						/>
+						{isSignUp &&
+							<Input name='confirmPassword'
+								label='Confirm Password'
+								handleChange={handleChange}
+							type='password'/>}
 					</Grid>
+					<Button type='submit
+					fullWidth'
+						variant='contained'
+						color='primary'
+						className>
+						{isSignUp ? 'Sign Up' : 'Sign In'}
+					</Button>
 				</form>
 			</Paper>
 		</Container>
