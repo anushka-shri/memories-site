@@ -14,16 +14,36 @@ import Input from './Input.js';
 import IconGoogle from './icon.js';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { signup, signin } from '../../actions/authActions';
+
+const initialState = {
+	firstName: '',
+	lastName: '',
+	email: '',
+	password: '',
+	confirmPassword: '',
+};
 
 function Auth() {
 	const classes = useStyles();
 	const [showPassword, setShowPassword] = useState(false);
 	const [isSignUp, setSignUp] = useState(false);
+	const [formData, setformData] = useState(initialState);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const handleSubmit = () => {};
-	const handleChange = () => {};
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		if (isSignUp) {
+			dispatch(signup(formData, history));
+		} else {
+			dispatch(signin(formData, history));
+		}
+	};
+	const handleChange = (e) => {
+		setformData({ ...formData, [e.target.name]: e.target.value });
+	};
 	const handleShowPassword = () => setShowPassword((prev) => !prev);
 	const switchMode = () => {
 		setSignUp(!isSignUp);
