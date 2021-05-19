@@ -6,20 +6,21 @@ import {
 	Button,
 	Container,
 	Grid,
-	Icon,
 } from '@material-ui/core';
 import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles';
 import Input from './Input.js';
-import IconGoogle from './icon.js'
-import {useDispatch} from 'react-redux'
+import IconGoogle from './icon.js';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function Auth() {
 	const classes = useStyles();
 	const [showPassword, setShowPassword] = useState(false);
 	const [isSignUp, setSignUp] = useState(false);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const handleSubmit = () => {};
 	const handleChange = () => {};
@@ -34,10 +35,9 @@ function Auth() {
 		const token = res?.tokenId;
 
 		try {
-			dispatch({ type: 'AUTH', data:{result, token}});
-		} catch (error) {
-			
-		}
+			dispatch({ type: 'AUTH', data: { result, token } });
+			history.push('/');
+		} catch (error) {}
 	};
 	const googleFailure = (error) => {
 		console.log(error);
