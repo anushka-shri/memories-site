@@ -13,11 +13,13 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles';
 import Input from './Input.js';
 import IconGoogle from './icon.js'
+import {useDispatch} from 'react-redux'
 
 function Auth() {
 	const classes = useStyles();
 	const [showPassword, setShowPassword] = useState(false);
 	const [isSignUp, setSignUp] = useState(false);
+	const dispatch = useDispatch();
 
 	const handleSubmit = () => {};
 	const handleChange = () => {};
@@ -26,8 +28,16 @@ function Auth() {
 		setSignUp(!isSignUp);
 	};
 	const googleSuccess = async (res) => {
-		console.log(res);
-		console.log('Login successful');
+		// ?. is Optional chaining operator
+		// ?. wont throw an error if the requested object is not found
+		const result = res?.profileObj;
+		const token = res?.tokenId;
+
+		try {
+			dispatch({ type: 'AUTH', data:{result, token}});
+		} catch (error) {
+			
+		}
 	};
 	const googleFailure = (error) => {
 		console.log(error);
