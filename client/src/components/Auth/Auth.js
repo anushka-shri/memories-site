@@ -45,8 +45,10 @@ function Auth() {
 		setformData({ ...formData, [e.target.name]: e.target.value });
 	};
 	const handleShowPassword = () => setShowPassword((prev) => !prev);
+
 	const switchMode = () => {
-		setSignUp(!isSignUp);
+		setSignUp((prevIsSignup) => !prevIsSignup);
+		setShowPassword(false);
 	};
 	const googleSuccess = async (res) => {
 		// ?. is Optional chaining operator
